@@ -1,0 +1,36 @@
+:root {
+    --article-primary: #131212;
+    --article-secondary: #dadada;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+article {
+    padding: 15% 15%;
+    background-color: var(--article-primary);
+
+}
+
+
+@media only screen and (min-width: 1000px) {
+
+    article:nth-child(4n),
+    article:nth-child(4n+1) {
+        background-color: var(--article-secondary);
+        color: var(--article-primary)
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    section {
+        grid-template-columns: 1fr;
+    }
+
+    article:nth-child(2n+1) {
+        background-color: var(--article-secondary);
+        color: var(--article-primary)
+    }
+}

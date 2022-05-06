@@ -1,0 +1,74 @@
+:root {
+    --text-primary: #dadada;
+    --bg-primary: #222020;
+    --bg-secondary: #131212;
+    --bg-hover: #353333;
+    --scroll-bar: #0e91fc;
+}
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-width: 100%;
+
+    font-family: 'Trebuchet MS';
+    color: var(--text-primary);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    height: 100vh;
+    margin: 0;
+}
+
+html::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+html::-webkit-scrollbar-track {
+    var(--text-primary);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--scroll-bar);
+}
+
+main {
+    margin: 2em 10em;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.menu-item {
+    float: left;
+}
+
+.menu-item a {
+    display: block;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+}
+
+.menu-item a:hover {
+    background-color: var(--bg-hover);
+}
+
+.right {
+    float: right;
+}
+
+footer {
+    margin-top: auto;
+    padding: 1em 0;
+    text-align: center;
+    background-color: var(--bg-secondary);
+}

@@ -53,7 +53,7 @@ class Router
 				$this->controllerClassName = 'App\controller\AuthController';
 				break;
 			default:
-				$this->controllerClassName = 'App\controller\AccueilController';
+				$this->controllerClassName = 'App\controller\HomeController';
 		}
 
 		if (!class_exists($this->controllerClassName)) {
