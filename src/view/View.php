@@ -52,23 +52,32 @@ class View
     /**
      * initialise le menu
      */
-    public function setMenu()
+    public function setMenu($userLogged)
     {
         $menu[] = array(
-            "link" => "",
+            "link" => "/",
             "text" => "Accueil",
             "class" => "menu-item",
         );
-        $menu[] = array(
-            "link" => "?o=auth&a=inscription",
-            "text" => "Inscription",
-            "class" => "menu-item right",
-        );
-        $menu[] = array(
-            "link" => "?o=auth&a=connexion",
-            "text" => "Connexion",
-            "class" => "menu-item right",
-        );
+        if ($userLogged) {
+            $menu[] = array(
+                "link" => "?o=auth&a=deconnexion",
+                "text" => "Déconnexion",
+                "class" => "menu-item right",
+            );
+        } else {
+            $menu[] = array(
+                "link" => "?o=auth&a=inscription",
+                "text" => "Inscription",
+                "class" => "menu-item right",
+            );
+            $menu[] = array(
+                "link" => "?o=auth&a=connexion",
+                "text" => "Connexion",
+                "class" => "menu-item right",
+            );
+        }
+        $menu = $this->menuToHtml($menu);
         $this->setPart('menu', $menu);
     }
 
@@ -88,5 +97,22 @@ class View
         ob_end_clean();
 
         return $data;
+    }
+
+    /**
+     * converti le menu en html
+     * @param  array $menu
+     * @return string
+     */
+    public function menuToHtml($menu)
+    {
+        $str = "";
+        foreach ($menu as $key => $item) {
+            $str .= '<li class="' . $item["class"] . '">';
+            $str .= '<a class="menu-link" href="' . $item["link"] . '">';
+            $str .= '<span class=\"link-text\">' . $item["text"] . '</span>';
+            $str .= '</a></li>';
+        }
+        return $str;
     }
 }

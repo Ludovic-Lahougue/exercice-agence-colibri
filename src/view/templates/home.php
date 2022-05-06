@@ -13,20 +13,13 @@
 <body>
     <nav>
         <ul class="menu">
-            <?php
-            if (isset($menu)) {
-                foreach ($menu as $key => $item) {
-                    echo "<li class=\"" . $item["class"] . "\">
-							<a class=\"menu-link\" href=\"" . $item["link"] . "\">"
-                        . "<span class=\"link-text\">" . $item["text"] . "</span>
-							</a>
-						</li>";
-                }
-            }
-            ?>
+            <?php if (isset($menu)) echo $menu; ?>
         </ul>
     </nav>
     <main>
+        <div>
+            <?php echo $content ?>
+        </div>
         <section>
             <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
             <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>

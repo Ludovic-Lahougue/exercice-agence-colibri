@@ -2,6 +2,7 @@
 
 namespace App\controller;
 
+use App\controller\AutenticationManager;
 use App\router\Router;
 use App\view\View;
 use \Exception;
@@ -30,11 +31,13 @@ class FrontController
     }
 
     /**
-     * méthode pour lancer le contrôleur et exécuter l'action à faire
+     * exécute le contrôleur de classe pour effectuer l'action
      */
     public function execute()
     {
         $view = null;
+        $auth = AutenticationManager::getInstance();
+
         try {
             // demander au Router la classe et l'action à exécuter
             $router = new Router($this->request);
@@ -42,12 +45,13 @@ class FrontController
             $action = $router->getControllerAction();
 
             // instancier le controleur de classe et exécuter l'action
-            $controller = new $className($this->request, $this->response);
+            $controller = new $className($this->request, $this->response, $auth);
             $controller->execute($action);
             $view = $controller->getView();
         } catch (Exception $e) {
             $view = new View('templates/home.php');
             $view->setPart('title', 'Erreur');
+            $view->setMenu($auth->isLogged());
             $content = $e->getMessage();
             $content .= "<div>" . nl2br($e->getTraceAsString()) . "</div>";
             $view->setPart('content', $content);
