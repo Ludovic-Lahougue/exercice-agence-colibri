@@ -32,6 +32,12 @@ article {
     border-bottom: 1px solid #949494;
 }
 
+.contact h3 {
+    text-align: center;
+    padding-bottom: 1rem;
+    color: var(--error);
+}
+
 .contact form {
     padding: 0 3rem;
     box-sizing: border-box;
@@ -93,6 +99,7 @@ article {
 
 .submit {
     width: 100%;
+    min-width: 10rem;
     height: 50px;
     border: 1px solid;
     background: var(--button);

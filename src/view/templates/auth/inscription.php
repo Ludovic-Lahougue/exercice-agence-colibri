@@ -23,7 +23,7 @@
             if (isset($content["error"])) {
                 switch ($content["error"]) {
                     case "bdd":
-                        echo '<div class=error>La base de donnée est inaccessible.</div>';
+                        echo '<div class=error>La base de données est inaccessible.</div>';
                         break;
                     case "mail":
                         echo '<div class=error>Cette adresse mail est déjà utilisée.</div>';

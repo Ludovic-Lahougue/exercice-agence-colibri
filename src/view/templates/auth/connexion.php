@@ -22,7 +22,7 @@
             <?php
             if (isset($content["error"])) {
                 if ($content["error"] == "bdd")
-                    echo '<div class=error>La base de donnée est inaccessible.</div>';
+                    echo '<div class=error>La base de données est inaccessible.</div>';
                 else echo '<div class=error>Mauvais login ou mot de passe.</div>';
             }
             ?>

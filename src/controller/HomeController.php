@@ -64,17 +64,24 @@ class HomeController
         $this->view->setMenu($this->auth->isLogged());
     }
 
+    /**
+     * traitement du formulaire de contact
+     */
     public function contact()
     {
+        $content = array();
         self::home();
         $prenom = $this->request->getPostParam('prenom');
         $nom = $this->request->getPostParam('nom');
         $mail = $this->request->getPostParam('mail');
         $message = $this->request->getPostParam('message');
 
-        if ($this->messageModel->isAvailable() && !empty($prenom) && !empty($nom) && !empty($mail) && !empty($message))
-            $this->messageModel->newMessage($prenom, $nom, $mail, $message);
-
-        $this->response->addHeader('Location: /');
+        if ($this->messageModel->isAvailable() && !empty($prenom) && !empty($nom) && !empty($mail) && !empty($message)) {
+            if ($this->messageModel->newMessage($prenom, $nom, $mail, $message));
+            $this->response->addHeader('Location: /');
+            return;
+        }
+        $content["error"] = true;
+        $this->view->setPart('content', $content);
     }
 }
