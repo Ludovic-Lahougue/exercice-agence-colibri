@@ -17,8 +17,15 @@
         </ul>
     </nav>
     <main>
-        <div>
-            <?php echo $content ?>
+        <div class="messageConfirm">
+            <?php
+            if (isset($content["message"])) {
+                if ($content["message"] == "success")
+                    echo '<p class="success">Votre message a bien été envoyé.</p>';
+                else if ($content["message"] == "error")
+                    echo '<p class="success">Il y a eu un problème dans l\'envoi de votre message.</p>';
+            }
+            ?>
         </div>
         <section>
             <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
@@ -28,7 +35,31 @@
         </section>
     </main>
     <footer>
-        <span>Copyright © 2021 Mon-super-site.fr</span>
+        <div class="contact">
+            <h1>Contact</h1>
+            <form class="form" method="POST" action="?a=contact">
+                <div class="field">
+                    <input id="prenom" type="text" name="prenom" required><br>
+                    <span></span>
+                    <label for="prenom">Prenom</label>
+                </div>
+                <div class="field">
+                    <input id="nom" type="text" name="nom" required><br>
+                    <span></span>
+                    <label for="nom">Nom</label>
+                </div>
+                <div class="field">
+                    <input id="mail" type="email" name="mail" required><br>
+                    <span></span>
+                    <label for="mail">Adresse mail</label>
+                </div>
+                <label for="message">Votre message</label>
+                <textarea id="message" name="message" rows="7" cols="60" maxlength="4095" required></textarea>
+                <button type="submit" name="submit" class="submit">Envoyer</button>
+            </form>
+            <div>
+                <hr>
+                <span>Copyright © 2021 Mon-super-site.fr</span>
     </footer>
 </body>
 

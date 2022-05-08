@@ -2,8 +2,6 @@
 
 namespace App\model;
 
-use App\model\Database;
-
 /**
  * Class User
  * Intéragit avec la base de données pour les données des utilisateurs

@@ -2,6 +2,7 @@
 
 namespace app\controller;
 
+use App\model\Message;
 use App\router\{Request, Response};
 use App\view\View;
 use \Exception;
@@ -17,12 +18,14 @@ class HomeController
     protected $response;
     protected $auth;
     protected $view;
+    protected $messageModel;
 
     public function __construct(Request $request, Response $response, AuthenticationManager $auth)
     {
         $this->request = $request;
         $this->response = $response;
         $this->auth = $auth;
+        $this->messageModel = new Message;
     }
 
     public function getView()
@@ -59,5 +62,19 @@ class HomeController
     {
         $this->view = new View('templates/home.php');
         $this->view->setMenu($this->auth->isLogged());
+    }
+
+    public function contact()
+    {
+        self::home();
+        $prenom = $this->request->getPostParam('prenom');
+        $nom = $this->request->getPostParam('nom');
+        $mail = $this->request->getPostParam('mail');
+        $message = $this->request->getPostParam('message');
+
+        if ($this->messageModel->isAvailable() && !empty($prenom) && !empty($nom) && !empty($mail) && !empty($message))
+            $this->messageModel->newMessage($prenom, $nom, $mail, $message);
+
+        $this->response->addHeader('Location: /');
     }
 }
