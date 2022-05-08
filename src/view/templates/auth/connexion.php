@@ -21,12 +21,14 @@
             <h1>Connexion</h1>
             <?php
             if (isset($content["error"])) {
-                echo '<div class=error>Mauvais login ou mot de passe.</div>';
+                if ($content["error"] == "bdd")
+                    echo '<div class=error>La base de donnée est inaccessible.</div>';
+                else echo '<div class=error>Mauvais login ou mot de passe.</div>';
             }
             ?>
-            <form class="form" method="POST" action="?o=connexion&amp;a=connexion">
+            <form class="form" method="POST" action="?o=auth&amp;a=connexion">
                 <div class="field">
-                    <input id="mail" type="text" name="mail" <?php if (isset($content["mail"])) echo ('value="' . $content["mail"] . '"') ?> maxlength="32" required><br>
+                    <input id="mail" type="email" name="mail" <?php if (isset($content["mail"])) echo ('value="' . $content["mail"] . '"') ?> maxlength="32" required><br>
                     <span></span>
                     <label for="mail">Adresse mail</label>
                 </div>

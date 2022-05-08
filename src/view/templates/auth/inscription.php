@@ -21,15 +21,22 @@
             <h1>Inscription</h1>
             <?php
             if (isset($content["error"])) {
-                if ($content["error"] == "mail")
-                    echo '<div class=error>Cette adresse mail est déjà utilisée.</div>';
-                else if ($content["error"] == "mdp")
-                    echo '<div class=error>Les mots de passe ne correspondent pas.</div>';
+                switch ($content["error"]) {
+                    case "bdd":
+                        echo '<div class=error>La base de donnée est inaccessible.</div>';
+                        break;
+                    case "mail":
+                        echo '<div class=error>Cette adresse mail est déjà utilisée.</div>';
+                        break;
+                    case 'mdp':
+                        echo '<div class=error>Les mots de passe ne correspondent pas.</div>';
+                        break;
+                }
             }
             ?>
-            <form class="form" method="POST" action="?o=connexion&amp;a=connexion">
+            <form class="form" method="POST" action="?o=auth&amp;a=inscription">
                 <div class="field">
-                    <input id="mail" type="text" name="mail" <?php if (isset($content["mail"])) echo ('value="' . $content["mail"] . '"') ?> maxlength="32" required><br>
+                    <input id="mail" type="email" name="mail" <?php if (isset($content["mail"])) echo ('value="' . $content["mail"] . '"') ?> maxlength="32" required><br>
                     <span></span>
                     <label for="mail">Adresse mail</label>
                 </div>

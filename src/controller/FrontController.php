@@ -2,7 +2,6 @@
 
 namespace App\controller;
 
-use App\controller\AutenticationManager;
 use App\router\Router;
 use App\view\View;
 use \Exception;
@@ -10,7 +9,6 @@ use \Exception;
 
 /**
  * Class FrontController
- * 
  * utilise le router pour définir la vue
  */
 class FrontController
@@ -36,7 +34,7 @@ class FrontController
     public function execute()
     {
         $view = null;
-        $auth = AutenticationManager::getInstance();
+        $auth = AuthenticationManager::getInstance();
 
         try {
             // demander au Router la classe et l'action à exécuter

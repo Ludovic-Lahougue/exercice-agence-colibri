@@ -2,7 +2,6 @@
 
 namespace App\controller;
 
-use App\controller\AutenticationManager;
 use App\router\{Request, Response};
 use App\view\View;
 use \Exception;
@@ -18,7 +17,7 @@ class AuthController
     protected $auth;
     protected $view;
 
-    public function __construct(Request $request, Response $response, AutenticationManager $auth)
+    public function __construct(Request $request, Response $response, AuthenticationManager $auth)
     {
         $this->request = $request;
         $this->response = $response;
@@ -82,9 +81,9 @@ class AuthController
         $mail = $this->request->getPostParam('mail');
         $password = $this->request->getPostParam('password');
         if ($mail != null && $password != null) {
-            $succes = $this->auth->connexion($mail, $password);
-            if (!$succes) {
-                $content["error"] = true;
+            $error = $this->auth->connexion($mail, $password);
+            if ($error != null) {
+                $content["error"] = $error;
                 $content["mail"] = $mail;
             } else $this->response->addHeader('Location: /');
         }
@@ -107,11 +106,12 @@ class AuthController
 
         $mail = $this->request->getPostParam('mail');
         $password = $this->request->getPostParam('password');
-        if ($mail != null && $password != null) {
-            $error = $this->auth->inscription($mail, $password);
+        $password2 = $this->request->getPostParam('password2');
+        if ($mail != null && $password != null && $password2 != null) {
+            $error = $password != $password2 ? "mdp" : $this->auth->inscription($mail, $password);
             if ($error != null) {
-                if ($error != "mail")
-                    unset($content["mail"]);
+                if ($error != "bdd")
+                    $content["mail"] = $mail;
                 $content["error"] = $error;
             } else $this->response->addHeader('Location: /');
         }

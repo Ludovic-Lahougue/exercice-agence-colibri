@@ -2,7 +2,6 @@
 
 namespace app\controller;
 
-use App\controller\AutenticationManager;
 use App\router\{Request, Response};
 use App\view\View;
 use \Exception;
@@ -19,7 +18,7 @@ class HomeController
     protected $auth;
     protected $view;
 
-    public function __construct(Request $request, Response $response, AutenticationManager $auth)
+    public function __construct(Request $request, Response $response, AuthenticationManager $auth)
     {
         $this->request = $request;
         $this->response = $response;
